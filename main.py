@@ -1,6 +1,6 @@
 from tkinter import *
-
 from random import randint, choice
+
 root= Tk()
 root.geometry("500x500")
 root.title("Maths Quiz app")
@@ -33,6 +33,12 @@ def generateQuestion():
     
 
 def checkAnswer():
+    global score_lbl
+    if questionNumber.get()>10:
+        return
+
+    
+
     global result_lbl
     if result_lbl:
         result_lbl.destroy()
@@ -50,15 +56,33 @@ def checkAnswer():
         result_lbl.grid(row=6, column=0)
 
 
-    generateQuestion()
+    if questionNumber.get()==10:
+        score_lbl.destroy()
+        score_lbl=Label(root, text=f"Final Score: {score.get()}", font=('Arial', 16), fg='blue')
+        score_lbl.grid(row=7, column=0)
+    else:
+        generateQuestion()
+
+
+    
         
 
-
+def restart():
+    global score_lbl
+    score_lbl.destroy()
+    score.set(0)
+    questionNumber.set(0)
+    generateQuestion()
+    score_lbl=Label(root, text=f"Score: {score.get()}", font=('Arial', 16), fg='blue')
+    score_lbl.grid(row=7, column=0)
 
 
 
 
 #UI
+
+
+
 Heading_lbl=Label(root,text= "Maths Quiz", font=('Arial', 30, 'bold'), fg=('blue'))
 Heading_lbl.grid(row=0, column=0)
 
@@ -66,7 +90,7 @@ questionScale= Scale(root, from_=0, to=10, length=400, orient=HORIZONTAL, variab
 questionScale.grid(row=1, column=0)
 
 complete_quest_lbl= Label(root, text="10th Question")
-complete_quest_lbl.grid(row=1, column=0)
+complete_quest_lbl.grid(row=1, column=2)
 
 
 ques_lbl=Label(root, text=question.get(), font=('Arial', 30))
@@ -87,5 +111,9 @@ score_lbl=Label(root, text=f"Score: {score.get()}", font=('Arial', 16), fg='blue
 score_lbl.grid(row=7, column=0)
 
 
+restart_btn=Button(root, text="Restart", font=("Arial", 20 ),fg=('purple'), command=restart)
+restart_btn.grid(row=8, column=0)
 
+
+generateQuestion()
 root.mainloop()
