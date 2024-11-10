@@ -2,7 +2,7 @@ from tkinter import *
 from random import randint, choice
 
 root= Tk()
-root.geometry("500x500")
+root.geometry("700x500")
 root.title("Maths Quiz app")
 
 
@@ -96,11 +96,11 @@ complete_quest_lbl.grid(row=1, column=2)
 ques_lbl=Label(root, text=question.get(), font=('Arial', 30))
 ques_lbl.grid(row=3, column=0)
 
-answerEntry= Entry(root,textvariable=givenAnswer, font=('Arial', 20))
+answerEntry= Entry(root,textvariable=givenAnswer, font=('Arial', 20), width=35)
 answerEntry.grid(row=4, column=0)
 
 submit_btn=Button(root, text="submit", font=("Arial", 20 ),fg=('purple'), command=checkAnswer)
-submit_btn.grid(row=5, column=3)
+submit_btn.grid(row=4, column=2)
 
 
 
